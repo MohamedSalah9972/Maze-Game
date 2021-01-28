@@ -8,7 +8,7 @@
   <title>MazeGame</title>
 </head>
 
-<body onload = "play()">
+<body">
 
   <header>Maze Game</header>
   <div class = 'settings'>
@@ -26,10 +26,12 @@
     <button id = "left" > Left  </button>
     <button id = "right"> Right </button> 
   </div>
-  <canvas class="maze"></canvas>
-  <div id = 'won' class="won"></div>
-  <script src="script.js"></script>
-  <script src="game.js"></script>
+  <canvas class = "maze"></canvas>
+  <div id = 'result' class="result"></div>
+  <div id = "timer"></div>
+  <script src = "script.js"></script>
+  <script src = "timer.js" ></script>
+  <script src = "game.js"  ></script>
 </body>
 
 </html>

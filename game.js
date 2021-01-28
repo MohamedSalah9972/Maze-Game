@@ -5,17 +5,24 @@ document.getElementById("right").addEventListener("click", right);
 document.getElementById("left").addEventListener("click", left);
 let player;
 let mazeGame;
+let timerStarted = false;
+let gameStarted = false;
+var timer = null;
+let TIME_LIMIT;
 function play() {
-    var level = document.getElementById('level').value;
+    let level = document.getElementById('level').value;
     if (level == 'Easy') {
+        TIME_LIMIT = 25;
         cellSize = 22;
         rows = 8;
         cols = 8;
     } else if (level == 'Medium') {
+        TIME_LIMIT = 30;
         cellSize = 20;
         rows = 16;
         cols = 16;
     } else if (level == 'Hard') {
+        TIME_LIMIT = 40;
         cellSize = 17;
         rows = 32;
         cols = 32;
@@ -26,19 +33,29 @@ function play() {
     player = grid[0][0];
     player.highLight();
     grid[rows - 1][cols - 1].destination = true;
-    let x = (rows - 1) * cellSize;
+    var x = (rows - 1) * cellSize;
     let y = (cols - 1) * cellSize;
     ctx.fillRect = "#1abc9c";
     ctx.strokeStyle = "#1abc9c";
     ctx.beginPath();
     ctx.rect(x + 4, y + 4, cellSize - 10, cellSize - 10);
     ctx.stroke();
-    document.getElementById('won').innerHTML = "";
-
+    document.getElementById('result').innerHTML = "";
+    if(timer===null){
+        timer = new Timer(TIME_LIMIT);
+    }
+    timer.reset(TIME_LIMIT);
+    timer.init();
+    timer.startTimer();
 }
 
 
 function movements(event) {
+    console.log(timerStarted,gameStarted);
+    if(!timerStarted && gameStarted)
+    {
+            timerStarted = true;
+    }
     if (!generationComplete || player.destination) {
         return;
     }
@@ -64,7 +81,8 @@ function movements(event) {
 
 function right() {
     
-    if (!generationComplete || player.destination) {
+    if (!generationComplete || player.destination || timer.timeLeft == 0) {
+        
         return;
     }
     let row = player.i;
@@ -75,7 +93,9 @@ function right() {
         player = element;
         player.highLight();
         if (player.destination) {
-            document.getElementById('won').innerHTML = "You win ^^";
+            gameStarted = false;
+            onTimesUp();
+            document.getElementById('result').innerHTML = "You win ^^";
         }
     }
 }
@@ -91,7 +111,9 @@ function up() {
         player = element;
         player.highLight();
         if (player.destination) {
-            document.getElementById('won').innerHTML = "You win ^^";
+            gameStarted = false;
+            onTimesUp();
+            document.getElementById('result').innerHTML = "You win ^^";
         }
     }
 }
@@ -107,7 +129,9 @@ function down() {
         player = element;
         player.highLight();
         if (player.destination) {
-            document.getElementById('won').innerHTML = "You win ^^";
+            gameStarted = false;
+            // onTimesUp();
+            document.getElementById('result').innerHTML = "You win ^^";
         }
     }
 }
@@ -126,7 +150,9 @@ function left() {
         player.highLight();
 
         if (player.destination) {
-            document.getElementById('won').innerHTML = "You win ^^";
+            gameStarted = false;
+            // onTimesUp();
+            document.getElementById('result').innerHTML = "You win ^^";
         }
     }
 }

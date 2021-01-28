@@ -165,6 +165,9 @@ class Maze {
             b.walls.top = false;
         }
     }
+
+
+    
 }
 
 function drawWall(x, y, a, b) {
