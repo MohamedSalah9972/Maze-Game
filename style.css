@@ -4,24 +4,11 @@
     padding: 10px;
   
 }
- header{
-    grid-area: header;
-    padding: 60px;
-    text-align: center;
-    background: #1abc9c;
-    color: white;
-    font-size: 30px;
-}
 
-.settings{
+
+#settings{
     
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    padding-top: 30px;
-    padding-left: 30%;
-    font-size: 30px;
-    position: relative;
-    font-family: Arial;
+   text-align: center;
 }
 
 .maze{
@@ -61,53 +48,15 @@
 
 
 
-.controllers{
-    position: relative;
-    left: 60%;
-    top: 250px;
-    display: grid;
-    grid-gap: 20px 20px;
-    grid-template-areas:
-    '. up .'
-    'left . right'
-    '. down .';
-    grid-template-columns: max-content max-content max-content;
-    grid-template-rows: max-content max-content max-content;
-    padding-bottom: 0px;
-    
-   
-}
-.up {
-    
-    height: 25px;
-    width: 60px;
-    grid-area: up;
-}
 
-.right {
-    height: 25px;
-    width: 60px;
-    grid-area: right;
-}
-
-.down {
-    height: 25px;
-    width: 60px;
-    grid-area: down;
-}
-
-.left {
-    height: 25px;
-    width: 60px;
-    grid-area: left;
-}
 .base-timer {
     /*left: 100px;
     bottom: 250px;*/
-    top: 300px;
+    
     position: absolute;
     width: 150px;
-    height: 150px;
+    height: 100px;
+    text-align: center;
 }
 
 .base-timer__svg {
@@ -149,12 +98,14 @@
 .base-timer__label {
   position: absolute;
   width: 150px;
-  height: 150px;
-  top: 0;
+  height: 19px;
+  bottom: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 48px;
+  
+
 }
 
 
@@ -198,36 +149,13 @@ button
   height: 50px;
   border:1px solid ;
 }
-#all
-{
 
-  width: 300px;
-  float: right;
-}
-#UP {
-  
-  text-align: center;
-  width: 300px;
-  
+
+#right {
+ float: right; 
   
 }
 
-#MID {
-  
-  text-align: center;
-  width: 300px;
-  
-
-  
-}
-#DOWN {
-  
-  text-align: center;
-  width: 300px;
-  
-  
-  
-}
 /* start da css for da buttons */
 .btn {
   border-radius: 5px;
@@ -246,20 +174,8 @@ button
   box-shadow: 0px 1px 0px 0px;
 }
 
-.blue {
-  background-color: #55acee;
-
-}
-
-.blue:hover {
-  background-color: #6FC6FF;
-}
-
-.green {
-  background-color: #2ecc71;
- 
-}
-
-.green:hover {
-  background-color: #48E68B;
+h2
+{
+  display: inline-block;
+  margin: 10px;
 }
