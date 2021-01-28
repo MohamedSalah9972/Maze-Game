@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MazeGame</title>
+</head>
+
+<body onload = "play()">
+
+  <header>Maze Game</header>
+  <div class = 'settings'>
+      <span>Level</span> 
+      <select id="level" class="level">
+      <option value="Easy">Easy</option>
+      <option value="Medium">Medium</option>
+      <option value="Hard">Hard</option>
+      </select>
+    <button type="button" onclick="play()" class="playButton"> Play </button>
+  </div>
+
+  <canvas class="maze"></canvas>
+  <div id = 'won' class="won"></div>
+  <script src="script.js"></script>
+  <script src="game.js"></script>
+</body>
+
+</html>
