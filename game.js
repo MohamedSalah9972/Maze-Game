@@ -17,12 +17,12 @@ function play() {
         rows = 8;
         cols = 8;
     } else if (level == 'Medium') {
-        TIME_LIMIT = 30;
+        TIME_LIMIT = 40;
         cellSize = 20;
         rows = 16;
         cols = 16;
     } else if (level == 'Hard') {
-        TIME_LIMIT = 40;
+        TIME_LIMIT = 120;
         cellSize = 17;
         rows = 32;
         cols = 32;
@@ -94,7 +94,7 @@ function right() {
         player.highLight();
         if (player.destination) {
             gameStarted = false;
-            onTimesUp();
+            timer.onTimesUp();
             document.getElementById('result').innerHTML = "You win ^^";
         }
     }
@@ -112,7 +112,7 @@ function up() {
         player.highLight();
         if (player.destination) {
             gameStarted = false;
-            onTimesUp();
+            timer.onTimesUp();
             document.getElementById('result').innerHTML = "You win ^^";
         }
     }
@@ -130,7 +130,7 @@ function down() {
         player.highLight();
         if (player.destination) {
             gameStarted = false;
-            // onTimesUp();
+            timer.onTimesUp();
             document.getElementById('result').innerHTML = "You win ^^";
         }
     }
@@ -151,7 +151,7 @@ function left() {
 
         if (player.destination) {
             gameStarted = false;
-            // onTimesUp();
+            timer.onTimesUp();
             document.getElementById('result').innerHTML = "You win ^^";
         }
     }

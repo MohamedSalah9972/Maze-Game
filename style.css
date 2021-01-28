@@ -1,5 +1,4 @@
 .body{
-    display: grid;
     grid-gap: 10px;
     background-color: #2196F3;
     padding: 10px;
@@ -53,7 +52,7 @@
 
 .result{
     grid-area: footer;
-    padding-top:17%;
+    /* padding-top:17%; */
     padding-left: 38%;
     color: blue;
     font-size: 40px;
@@ -61,12 +60,50 @@
 
 
 
+.controllers{
+    position: relative;
+    left: 60%;
+    top: 250px;
+    display: grid;
+    grid-gap: 20px 20px;
+    grid-template-areas:
+    '. up .'
+    'left . right'
+    '. down .';
+    grid-template-columns: max-content max-content max-content;
+    grid-template-rows: max-content max-content max-content;
+   
+}
+.up {
+    
+    height: 25px;
+    width: 60px;
+    grid-area: up;
+}
 
+.right {
+    height: 25px;
+    width: 60px;
+    grid-area: right;
+}
 
+.down {
+    height: 25px;
+    width: 60px;
+    grid-area: down;
+}
+
+.left {
+    height: 25px;
+    width: 60px;
+    grid-area: left;
+}
 .base-timer {
-  position: relative;
-  width: 300px;
-  height: 300px;
+    left: 100px;
+    bottom: 250px;
+    position: absolute;
+    width: 300px;
+    height: 300px;
 }
 
 .base-timer__svg {
