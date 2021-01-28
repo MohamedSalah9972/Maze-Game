@@ -1,4 +1,8 @@
 document.addEventListener("keydown", movements);
+document.getElementById("up").addEventListener("click", up);
+document.getElementById("down").addEventListener("click", down);
+document.getElementById("right").addEventListener("click", right);
+document.getElementById("left").addEventListener("click", left);
 let player;
 let mazeGame;
 function play() {
@@ -40,55 +44,89 @@ function movements(event) {
     }
     // requestAnimationFrame(8)
     let key = event.key;
-    let row = player.i;
-    let col = player.j;
+    
     // console.log(player);
     switch (key) {
         case "ArrowUp":
-            if (!player.walls.top) {
-                let element = grid[row][col - 1];
-                player.clearHighLight();
-                player = element;
-                player.highLight();
-                if (player.destination) {
-                    document.getElementById('won').innerHTML = "You win ^^";
-                }
-            }
+            up();
             break;
         case "ArrowDown":
-            if (!player.walls.bottom) {
-                let element = grid[row][col + 1];
-                player.clearHighLight();
-                player = element;
-                player.highLight();
-                if (player.destination) {
-                    document.getElementById('won').innerHTML = "You win ^^";
-                }
-            }
+            down();
             break;
         case "ArrowRight":
-            if (!player.walls.right) {
-                let element = grid[row + 1][col];
-                player.clearHighLight();
-                player = element;
-                player.highLight();
-                if (player.destination) {
-                    document.getElementById('won').innerHTML = "You win ^^";
-                }
-            }
+           right();
             break;
         case "ArrowLeft":
-            if (!player.walls.left) {
-
-                let element = grid[row - 1][col];
-                player.clearHighLight();
-                player = element;
-                player.highLight();
-
-                if (player.destination) {
-                    document.getElementById('won').innerHTML = "You win ^^";
-                }
-            }
+            left();
             break;
+    }
+}
+
+function right() {
+    
+    if (!generationComplete || player.destination) {
+        return;
+    }
+    let row = player.i;
+    let col = player.j;
+    if (!player.walls.right) {
+        let element = grid[row + 1][col];
+        player.clearHighLight();
+        player = element;
+        player.highLight();
+        if (player.destination) {
+            document.getElementById('won').innerHTML = "You win ^^";
+        }
+    }
+}
+function up() {
+    if (!generationComplete || player.destination) {
+        return;
+    }
+    let row = player.i;
+    let col = player.j;
+    if (!player.walls.top) {
+        let element = grid[row][col - 1];
+        player.clearHighLight();
+        player = element;
+        player.highLight();
+        if (player.destination) {
+            document.getElementById('won').innerHTML = "You win ^^";
+        }
+    }
+}
+function down() {
+    if (!generationComplete || player.destination) {
+        return;
+    }
+    let row = player.i;
+    let col = player.j;
+    if (!player.walls.bottom) {
+        let element = grid[row][col + 1];
+        player.clearHighLight();
+        player = element;
+        player.highLight();
+        if (player.destination) {
+            document.getElementById('won').innerHTML = "You win ^^";
+        }
+    }
+}
+
+function left() {
+    if (!generationComplete || player.destination) {
+        return;
+    }
+    let row = player.i;
+    let col = player.j;
+    if (!player.walls.left) {
+
+        let element = grid[row - 1][col];
+        player.clearHighLight();
+        player = element;
+        player.highLight();
+
+        if (player.destination) {
+            document.getElementById('won').innerHTML = "You win ^^";
+        }
     }
 }
