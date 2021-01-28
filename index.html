@@ -21,17 +21,41 @@
     <button type="button" onclick="play()" class="playButton"> Play </button>
   </div>
   <div id = "timer"></div>
-  <div class="controllers">
-    <button id = "up" class="up"> Up    </button>
-    <button id = "down" class="down"> Down  </button>
-    <button id = "left" class="left"> Left  </button>
-    <button id = "right" class="right"> Right </button> 
+
+
+  <!-- start the realm of the buttons -->
+  <div id="all">
+  <div id="UP">
+    <button class="btn blue" id = "up" class="up">Up</button>
   </div>
+<div id="MID">
+  
+  <button class="btn green" id = "left" class="left">Left</button>
+  <button class="btn green" id = "right" class="right">Right</button>
+  
+</div>
+<div id="DOWN">
+  <button class="btn blue" id = "down" class="down">Down</button>
+</div>
+
+</div>
+
+<div>
   <canvas class = "maze"></canvas>
+  </div>
+
+
+
+ 
   <div id = 'result' class="result"></div>
   <script src = "script.js"></script>
   <script src = "timer.js" ></script>
   <script src = "game.js"  ></script>
+
+
+
+
+
 </body>
 
 </html>
