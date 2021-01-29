@@ -1,9 +1,3 @@
-let cols, rows, currentCell, cellSize;
-let grid = [];
-let maze = document.querySelector(".maze");
-let ctx = maze.getContext("2d");
-let generationComplete = false;
-
 class Walls {
     constructor() {
         Walls.top = true;
@@ -25,6 +19,7 @@ class Cell {
         this.walls.bottom = true;
         this.walls.right = true;
         this.destination = false;
+        this.collectable = false;
     }
 
     getUnvisitedNeighbors() {
@@ -50,18 +45,31 @@ class Cell {
         ctx.strokeStyle = "red";
         ctx.fillRect = "red"
         ctx.lineWidth = 2;
-
         if (this.walls.top) {
             drawWall(x * cellSize, y * cellSize, x * cellSize + cellSize, y * cellSize);
         }
+
         if (this.walls.right === true) {
             drawWall(x * cellSize + cellSize, y * cellSize + cellSize, x * cellSize + cellSize, y * cellSize);
         }
+
         if (this.walls.bottom) {
             drawWall(x * cellSize + cellSize, y * cellSize + cellSize, x * cellSize, y * cellSize + cellSize);
         }
+
         if (this.walls.left) {
             drawWall(x * cellSize, y * cellSize, x * cellSize, y * cellSize + cellSize);
+        }
+        if (this.collectable) {
+            x = x * cellSize + cellSize / 2;
+            y = y * cellSize + cellSize / 2;
+            ctx.beginPath();
+            ctx.arc(x, y, cellSize / 7, 0, 2 * Math.PI);
+            ctx.fillStyle = 'green';
+            ctx.fillRect = "green"
+            ctx.fill();
+            ctx.strokeStyle = "green";
+            ctx.stroke();
         }
 
     }
@@ -73,6 +81,8 @@ class Cell {
         ctx.strokeStyle = "black";
         ctx.beginPath();
         ctx.rect(x + 4, y + 4, cellSize - 10, cellSize - 10);
+        ctx.fillStyle = 'black';
+        ctx.fill();
         ctx.stroke();
     }
 
@@ -81,98 +91,58 @@ class Cell {
         let y = this.j * cellSize;
         ctx.fillRect = "white";
         ctx.strokeStyle = "white";
-
         ctx.beginPath();
         ctx.rect(x + 4, y + 4, cellSize - 10, cellSize - 10);
+        ctx.fillStyle = 'white';
+        ctx.fill();
         ctx.stroke();
     }
 
-}
-
-class Maze {
-    constructor(rows, cols) {
-        this.rows = rows;
-        this.cols = cols;
-        this.stack = [];
-
-    }
-
-
-    setup() {
-        for (let i = 0; i < rows; i++) {
-            grid[i] = [];
-            for (let j = 0; j < cols; j++) {
-                grid[i][j] = (new Cell(i, j));
-
-            }
-        }
-        currentCell = grid[0][0];
-        this.stack.push(currentCell);
-        maze.width = this.rows * cellSize;
-        maze.height = this.cols * cellSize;
-        // this.grid[this.rows - 1][this.cols - 1
-    }
-
-    draw() {
-
-        if (this.stack.length == 0) {
-            generationComplete = true;
-            this.show();
+    destroyWall(wallNumber){
+        if (numberOfCollectableItems < 3) {
             return;
         }
-
-        currentCell.isVisited = true;
-        let nextCell = currentCell.getUnvisitedNeighbors();
-        if (nextCell) {
-            nextCell.isVisited = true;
-            this.stack.push(currentCell);
-            this.removeWalls(currentCell, nextCell);
-            currentCell = nextCell;
-        } else if (this.stack.length > 0) {
-            currentCell = this.stack.pop();
-        }
-        this.draw();
-    }
-
-    show() {
-
-        maze.style.background = "white";
-        for (var i = 0; i < this.rows; i++) {
-            for (var j = 0; j < this.cols; j++) {
-                grid[i][j].show();
+        
+        // top right bottom left
+        let x = (this.i);
+        let y = (this.j);
+        ctx.strokeStyle = "white";
+        ctx.fillRect = "white"
+        ctx.lineWidth = 2;
+        if (wallNumber == 1 && this.walls.top) {
+            this.walls.top = false;
+            numberOfCollectableItems -= 3;
+            if (grid[x][y - 1]) {
+                grid[x][y - 1].walls.bottom = false;
             }
+            drawWall(x * cellSize, y * cellSize, x * cellSize + cellSize, y * cellSize);
+
         }
+        else if (wallNumber == 2 && this.walls.right) {
+            this.walls.right = false;
+            numberOfCollectableItems -= 3;
+            if (grid[x + 1][y]) {
+                grid[x + 1][y].walls.left = false;
+            }
+            drawWall(x * cellSize + cellSize, y * cellSize + cellSize, x * cellSize + cellSize, y * cellSize);
+        }
+        else if (wallNumber == 3 && this.walls.bottom) {
+            this.walls.bottom = false;
+            numberOfCollectableItems -= 3;
+            if (grid[x][y + 1]) {
+                grid[x][y + 1].walls.top = false;
+            }
+            drawWall(x * cellSize + cellSize, y * cellSize + cellSize, x * cellSize, y * cellSize + cellSize);
+        }
+        else if (wallNumber == 4 && this.walls.left) {
+            this.walls.left = false;
+            numberOfCollectableItems -= 3;
+            if (grid[x - 1][y]) {
+                grid[x - 1][y].walls.right = false;
+            }
+            drawWall(x * cellSize, y * cellSize, x * cellSize, y * cellSize + cellSize);
+        }
+        
 
     }
-
-    removeWalls(a, b) {
-        let i = a.i - b.i;
-        /// top right bottom left
-        if (i == 1) {
-            a.walls.left = false;
-            b.walls.right = false;
-        } else if (i == -1) {
-            a.walls.right = false;
-            b.walls.left = false;
-        }
-
-        let y = a.j - b.j;
-        if (y == 1) {
-            a.walls.top = false;
-            b.walls.bottom = false;
-        } else if (y == -1) {
-            a.walls.bottom = false;
-            b.walls.top = false;
-        }
-    }
-
-
-    
-}
-
-function drawWall(x, y, a, b) {
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(a, b);
-    ctx.stroke();
 }
