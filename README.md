@@ -21,7 +21,7 @@ A maze is a type of puzzle games where a player moves in complex and branched pa
 - ArrowDown: Move down 
 - ArrowLeft: Move left 
 
-- You can destroy a wall with 3 
+- You can destroy a wall with 3 points
 
 - W : Destroy top wall 
 - D : Destroy right wall
