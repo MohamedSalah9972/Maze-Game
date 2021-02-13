@@ -3,7 +3,7 @@ A maze is a type of puzzle games where a player moves in complex and branched pa
 
 # Algorithms used
 - The depth-first search algorithm of maze generation is implemented using stack (iterative method) instead of the recursive method to **handle recursion stack overflow**
-### The DFS algorithm **(itrative method)** works as follows:
+### The DFS algorithm **(iterative method)** works as follows:
 - Choose the initial cell, mark it as visited and push it to the stack
   - While the stack is not empty
     - Pop a cell from the stack and make it a current cell
