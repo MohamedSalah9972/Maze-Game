@@ -128,7 +128,7 @@ function update(next) {
 }
 function right() {
     
-    if (!generationComplete || player.destination) {
+    if (!generationComplete || player.destination || timer.timeLeft==0) {
         return;
     }
 
@@ -145,7 +145,7 @@ function right() {
     }
 }
 function up() {
-    if (!generationComplete || player.destination) {
+    if (!generationComplete || player.destination || timer.timeLeft==0) {
         return;
     }
 
@@ -162,7 +162,7 @@ function up() {
     }
 }
 function down() {
-    if (!generationComplete || player.destination) {
+    if (!generationComplete || player.destination || timer.timeLeft==0) {
         return;
     }
 
@@ -180,7 +180,7 @@ function down() {
 }
 
 function left() {
-    if (!generationComplete || player.destination) {
+    if (!generationComplete || player.destination || timer.timeLeft==0) {
         return;
     }
 
