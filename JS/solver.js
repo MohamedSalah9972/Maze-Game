@@ -7,6 +7,7 @@ let parent = [], path = [];
 let isVisited = [], c;
 
 function initiate() {
+    clearInterval(go);
     const level = document.getElementById('level').value;
     if (level == 'Easy'){
         c = 300;
@@ -45,7 +46,6 @@ function noWall(i,j,x,y) {
     }
 }
 function solve() {
-    clearInterval(go);
     play();
     initiate();
     // BFS

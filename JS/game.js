@@ -29,6 +29,7 @@ function play() {
         rows = 32;
         cols = 32;
     }
+    initiate();
     mazeGame = new Maze(rows, cols);
     prepareGame(mazeGame);
     
