@@ -1,16 +1,16 @@
-document.addEventListener("keydown", movements);
-document.getElementById("up").addEventListener("click", up);
-document.getElementById("down").addEventListener("click", down);
-document.getElementById("right").addEventListener("click", right);
-document.getElementById("left").addEventListener("click", left);
+
 let player = null;
 let mazeGame = null;
 let gameStarted = false;
 var timer = null;
 let TIME_LIMIT;
 let numberOfCollectableItems=0;
-function play() {
-    gameStarted = false;
+function setupGame() {
+    getInputValues();
+    prepareGame();
+    addMovementAction();
+}
+function getInputValues() {
     gameStarted = false;
     const level = document.getElementById('level').value;
     if (level == 'Easy') {
@@ -29,12 +29,9 @@ function play() {
         rows = 32;
         cols = 32;
     }
-    initiate();
-    mazeGame = new Maze(rows, cols);
-    prepareGame(mazeGame);
-    
 }
-function prepareGame(mazeGame) {
+function prepareGame() {
+    mazeGame = new Maze(rows, cols);
     mazeGame.setup();
     mazeGame.draw();
     mazeGame.setCollectableItems();
@@ -68,6 +65,22 @@ function setPlayer() {
     ctx.fill();
     ctx.stroke();
     return player;
+}
+
+function addMovementAction() {
+    document.addEventListener("keydown", movements);
+    document.getElementById("up").addEventListener("click", up);
+    document.getElementById("down").addEventListener("click", down);
+    document.getElementById("right").addEventListener("click", right);
+    document.getElementById("left").addEventListener("click", left);
+}
+
+function removeMovementAction() {
+    document.removeEventListener("keydown", movements);
+    document.getElementById("up").removeEventListener("click", up);
+    document.getElementById("down").removeEventListener("click", down);
+    document.getElementById("right").removeEventListener("click", right);
+    document.getElementById("left").removeEventListener("click", left);
 }
 
 function movements(event) {

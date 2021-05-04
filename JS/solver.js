@@ -46,8 +46,10 @@ function noWall(i,j,x,y) {
     }
 }
 function solve() {
-    play();
+    getInputValues();
+    prepareGame();
     initiate();
+    removeMovementAction();
     // BFS
     let queue = [],i=0,j=0;
     queue.push([i, j])
@@ -95,9 +97,6 @@ function solve() {
         if (i == path.length)
             clearInterval(go);
     }, c);
-
-    
-
 }
 
 function getPath(i, j) {
