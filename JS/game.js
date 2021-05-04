@@ -9,6 +9,7 @@ function setupGame() {
     getInputValues();
     prepareGame();
     addMovementAction();
+    initiate();
 }
 function getInputValues() {
     gameStarted = false;
